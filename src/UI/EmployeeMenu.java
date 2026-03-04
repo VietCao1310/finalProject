@@ -248,7 +248,7 @@ public class EmployeeMenu {
                     Employee emp = employeeManager.findById(id);
 
                     if (emp != null) {
-                        System.out.println(emp);
+                        printOne(emp);
                     } else {
                         System.out.println("Employee not found.");
                     }
@@ -311,9 +311,36 @@ public class EmployeeMenu {
             System.out.println("No employees found.");
             return;
         }
+        System.out.printf("%-8s %-20s %-15s %-20s %-12s %-10s%n",
+                "ID", "Name", "Department", "Job Title", "Salary", "Status");
+        System.out.println("--------------------------------------------------------------------------");
 
         for (Employee e : list) {
-            System.out.println(e);
+
+            System.out.printf("%-8s %-20s %-15s %-20s %-12s %-10s%n",
+                    e.getId(),
+                    e.getFullName(),
+                    e.getDepartment(),
+                    e.getJobTitle(),
+                    String.format("%,.0f", e.getBasicSalary()),
+                    e.isActive() ? "Active" : "Inactive");
         }
+    }
+    
+    
+    private void printOne(Employee e) {
+
+        System.out.printf("%-8s %-20s %-15s %-20s %-12s %-10s%n",
+                "ID", "Name", "Department", "Job Title", "Salary", "Status");
+
+        System.out.println("--------------------------------------------------------------------------");
+
+        System.out.printf("%-8s %-20s %-15s %-20s %-12s %-10s%n",
+                e.getId(),
+                e.getFullName(),
+                e.getDepartment(),
+                e.getJobTitle(),
+                String.format("%,.0f", e.getBasicSalary()),
+                e.isActive() ? "Active" : "Inactive");
     }
 }

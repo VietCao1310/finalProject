@@ -1,5 +1,6 @@
 package Entities;
 
+import Enums.EmployeeStatus;
 import java.time.LocalDate;
 
 public abstract class Employee {

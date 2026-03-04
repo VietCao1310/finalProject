@@ -2,7 +2,7 @@ package manager;
 
 import DAO.AttendanceDAO;
 import Entities.Attendance;
-import Entities.AttendanceStatus;
+import Enums.AttendanceStatus;
 import Entities.Employee;
 
 import java.time.LocalDate;
@@ -93,7 +93,6 @@ public class AttendanceManager {
     public List<Attendance> getAttendanceByMonth(String employeeId,
                                                  int month,
                                                  int year) {
-
         List<Attendance> result = new ArrayList<>();
 
         for (Attendance a : attendanceList) {

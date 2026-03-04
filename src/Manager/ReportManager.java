@@ -2,7 +2,7 @@ package manager;
 
 import Entities.Employee;
 import Entities.Attendance;
-import Entities.AttendanceStatus;
+import Enums.AttendanceStatus;
 
 import java.time.LocalDate;
 import java.util.List;

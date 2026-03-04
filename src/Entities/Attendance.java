@@ -1,5 +1,6 @@
 package Entities;
 
+import Enums.AttendanceStatus;
 import java.time.LocalDate;
 
 public class Attendance {

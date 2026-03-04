@@ -31,7 +31,7 @@ public class EmployeeManager {
         employeeDAO.saveEmployees(employees);
     }
 
-    // READ - Find by ID
+    // SEARCH - Find by ID
     public Employee findById(String id) {
 
         if (id == null || id.trim().isEmpty()) {
@@ -53,7 +53,6 @@ public class EmployeeManager {
     }
 
     // UPDATE - Update Employee Info
-
     public void updateEmployee(String id,
                                String fullName,
                                String department,
@@ -65,7 +64,6 @@ public class EmployeeManager {
         if (e == null) {
             throw new IllegalArgumentException("Employee not found.");
         }
-
         if (!e.isActive()) {
             throw new IllegalStateException("Cannot update inactive employee.");
         }
@@ -74,7 +72,6 @@ public class EmployeeManager {
         e.setDepartment(department);
         e.setJobTitle(jobTitle);
         e.setBasicSalary(basicSalary);
-
         employeeDAO.saveEmployees(employees);
     }
 
@@ -86,7 +83,6 @@ public class EmployeeManager {
         if (e == null) {
             throw new IllegalArgumentException("Employee not found.");
         }
-
         if (!e.isActive()) {
             throw new IllegalStateException("Employee already inactive.");
         }

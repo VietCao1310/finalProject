@@ -1,7 +1,7 @@
 package DAO;
 
 import Entities.Attendance;
-import Entities.AttendanceStatus;
+import Enums.AttendanceStatus;
 
 import java.io.*;
 import java.time.LocalDate;

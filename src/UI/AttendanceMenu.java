@@ -3,10 +3,12 @@ package UI;
 import manager.AttendanceManager;
 import manager.EmployeeManager;
 import Entities.Attendance;
-import Entities.AttendanceStatus;
+import Enums.AttendanceStatus;
 import Entities.Employee;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,12 +57,12 @@ public class AttendanceMenu {
     }
 
     // ================= RECORD =================
-    private void recordAttendance() {
+        private void recordAttendance() {
 
         System.out.println("\n----- RECORD ATTENDANCE -----");
 
         System.out.print("Enter Employee ID: ");
-        String id = scanner.nextLine();
+        String id = scanner.nextLine().trim();
 
         Employee employee = employeeManager.findById(id);
 
@@ -74,16 +76,38 @@ public class AttendanceMenu {
             return;
         }
 
-        System.out.print("Enter date (yyyy-mm-dd): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
+        // ===== DATE INPUT dd/MM/yyyy =====
+        System.out.print("Enter date (dd/MM/yyyy): ");
+        String dateInput = scanner.nextLine().trim();
 
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate date;
+
+        try {
+            date = LocalDate.parse(dateInput, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Use dd/MM/yyyy.");
+            return;
+        }
+
+        // ===== STATUS =====
         System.out.println("Select Status:");
         System.out.println("1. PRESENT");
         System.out.println("2. ABSENT");
         System.out.println("3. LEAVE");
         System.out.print("Choose: ");
 
-        int statusChoice = Integer.parseInt(scanner.nextLine());
+        int statusChoice;
+
+        try {
+            statusChoice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input.");
+            return;
+        }
+
         AttendanceStatus status;
 
         switch (statusChoice) {
@@ -101,11 +125,29 @@ public class AttendanceMenu {
                 return;
         }
 
+        // ===== OVERTIME =====
         int overtime = 0;
 
         if (status == AttendanceStatus.PRESENT) {
+
             System.out.print("Enter overtime hours: ");
-            overtime = Integer.parseInt(scanner.nextLine());
+
+            try {
+                overtime = Integer.parseInt(scanner.nextLine());
+
+                if (overtime < 0) {
+                    System.out.println("Overtime must be >= 0.");
+                    return;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid overtime value.");
+                return;
+            }
+
+        } else {
+            
+            overtime = 0;
         }
 
         try {
