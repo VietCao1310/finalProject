@@ -1,1 +1,0 @@
-E01,Nguyen Van A,R&D,Senior Engineer,2023-03-01,1.2E7,FullTimeEmployee,false

@@ -28,7 +28,7 @@ public class MainMenu {
     public void show() {
 
         Scanner sc = new Scanner(System.in);
-        int choice;
+        int choice = 0;
 
         do {
             System.out.println("===========================================");
@@ -42,8 +42,15 @@ public class MainMenu {
             System.out.println("-------------------------------------------");
             System.out.print("Choose an option: ");
 
-            choice = Integer.parseInt(sc.nextLine());
+            String input = sc.nextLine();
 
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a number (1-5).");
+                continue; 
+            }
+            
             switch (choice) {
 
                 case 1:
@@ -67,9 +74,9 @@ public class MainMenu {
                     break;
 
                 default:
-                    System.out.println("Invalid option.");
+                    System.out.println("Invalid option. Please choose from 1-5.");
+                    break;
             }
-
         } while (choice != 5);
     }
 }
